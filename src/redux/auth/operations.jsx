@@ -4,15 +4,15 @@ import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:4000/api';
 
-// Utility to add JWT
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+// // Utility to add JWT
+// const setAuthHeader = token => {
+//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
-// Utility to remove JWT
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
+// // Utility to remove JWT
+// const clearAuthHeader = () => {
+//   axios.defaults.headers.common.Authorization = '';
+// };
 
 export const register = createAsyncThunk(
   'auth/register',
