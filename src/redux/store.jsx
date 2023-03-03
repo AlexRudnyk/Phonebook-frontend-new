@@ -15,6 +15,7 @@ import storage from 'redux-persist/lib/storage';
 const authPersistConfig = {
   key: 'auth',
   storage,
+  blacklist: ['verificationToken'],
 };
 
 export const store = configureStore({
@@ -27,6 +28,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    // .concat(authApi.middleware),
   ],
 });
 
