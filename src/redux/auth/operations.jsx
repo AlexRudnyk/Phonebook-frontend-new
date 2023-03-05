@@ -2,17 +2,8 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
-
-// // Utility to add JWT
-// const setAuthHeader = token => {
-//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
-
-// // Utility to remove JWT
-// const clearAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = '';
-// };
+axios.defaults.baseURL =
+  'https://nodejs-homework-rest-api-sandy.vercel.app/api';
 
 export const token = {
   set(token) {
@@ -42,9 +33,7 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/users/login', credentials);
-      console.log('TOKEN: ', data.token);
       token.set(data.token);
-      console.log('HEADER: ', axios.defaults.headers.common.Authorization);
       toast.success('Welcome on board');
       return data;
     } catch (error) {
@@ -62,3 +51,20 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const { token } = thunkAPI.getState().auth;
+    if (!token) {
+      return thunkAPI.rejectWithValue('No valid token');
+    }
+    try {
+      token.set(token);
+      const res = await axios.get('/users/current');
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

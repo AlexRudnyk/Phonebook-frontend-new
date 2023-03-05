@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const AppWrapper = styled.header`
   display: flex;
@@ -9,4 +10,6 @@ export const AppWrapper = styled.header`
     23px 0 20px -23px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 `;
 
-export const AppTitle = styled.h1``;
+export const AppBarLink = styled(Link)`
+  text-decoration: none;
+`;
