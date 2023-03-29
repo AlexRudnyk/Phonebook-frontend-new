@@ -5,6 +5,8 @@ import { login } from 'redux/auth/operations';
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
+// Проверкадеплоя на гитхаб
+
 export const LoginPage = () => {
   const dispatch = useDispatch();
 
